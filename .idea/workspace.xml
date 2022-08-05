@@ -4,7 +4,6 @@
     <list default="true" id="a10a72f4-8b86-492c-83a4-502f96485870" name="Changes" comment="Add koding.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Figure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Box.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1659640256137</updated>
       <workItem from="1659640257531" duration="9788000" />
-      <workItem from="1659685615585" duration="15187000" />
+      <workItem from="1659685615585" duration="17092000" />
     </task>
     <task id="LOCAL-00001" summary="Add class Window, Coord, enum Figure.">
       <created>1659646858332</created>
@@ -89,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659701181882</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add koding.">
+      <created>1659704757169</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659704757169</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -75,17 +75,30 @@ public class Window extends JFrame implements Runnable {
 
         if (coord.x + sx + figure.top.x < 0) return false;
         if (coord.x + sx + figure.bot.x >= Config.WIDTH) return false;
-        if (coord.y + sy + figure.top.y < 0) return false;
-        if (coord.y + sy +figure.bot.y >= Config.HEIGHT) return false;
+        //if (coord.y + sy + figure.top.y < 0) return false;
+        if (coord.y + sy + figure.bot.y >= Config.HEIGHT) return false;
         return true;
     }
+
     private void turnFigure() {
         Figure rotate = figure.turnRight();
-        if (!canMoveFigure(rotate,0,0)) return;
-        figure = rotate;
+        if (canMoveFigure(rotate, 0, 0))
+            figure = rotate;
+        else if (canMoveFigure(rotate, 1, 0)) {
+            figure = rotate;
+            moveFigure(1, 0);
+        } else if (canMoveFigure(rotate, -1, 0)) {
+            figure = rotate;
+            moveFigure(-1, 0);
+        }else
+        if (canMoveFigure(rotate, 0,-1)) {
+            figure = rotate;
+            moveFigure(0, -1);
+        }
     }
+
     private void moveFigure(int sx, int sy) {
-        if (canMoveFigure(figure,sx, sy))
+        if (canMoveFigure(figure, sx, sy))
             coord = coord.plus(sx, sy);
     }
 
@@ -99,10 +112,10 @@ public class Window extends JFrame implements Runnable {
 
             hideFigure();
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT -> moveFigure(-1,0);
-                case KeyEvent.VK_RIGHT -> moveFigure(1,0);
-                case KeyEvent.VK_DOWN -> moveFigure(0,1);
-                case KeyEvent.VK_UP -> moveFigure(0,-1);
+                case KeyEvent.VK_LEFT -> moveFigure(-1, 0);
+                case KeyEvent.VK_RIGHT -> moveFigure(1, 0);
+                case KeyEvent.VK_DOWN -> moveFigure(0, 1);
+                case KeyEvent.VK_UP -> moveFigure(0, -1);
                 case KeyEvent.VK_SPACE -> turnFigure();
             }
             showFigure();
