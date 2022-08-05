@@ -1,7 +1,6 @@
 package ui;
 
 import model.Coord;
-import model.Figures;
 import service.FlyFigure;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ import java.awt.event.KeyListener;
 
 public class Window extends JFrame implements Runnable {
 
-    private Box[][] boxes;
+    private final Box[][] boxes;
     private FlyFigure fly;
 
     public Window() throws HeadlessException {
@@ -65,7 +64,7 @@ public class Window extends JFrame implements Runnable {
 
     private void showFigure( int color) {
         for (Coord dot : fly.getFigure().dots)
-            setBoxColor(fly.getCoord().x + dot.x, fly.getCoord().y + dot.y, 1);
+            setBoxColor(fly.getCoord().x + dot.x, fly.getCoord().y + dot.y, color);
     }
 
 
@@ -76,8 +75,15 @@ public class Window extends JFrame implements Runnable {
     }
     private void moveFly(int sx, int sy){
         hideFigure();
+        fly.moveFigure(sx, sy);
         showFigure();
     }
+    private void turnFly(int direction){
+        hideFigure();
+        fly.turnFigure(direction);
+        showFigure();
+    }
+
 
     class KeyAdapter implements KeyListener {
         @Override
@@ -87,11 +93,11 @@ public class Window extends JFrame implements Runnable {
         @Override
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT -> fly.moveFigure(-1, 0);
-                case KeyEvent.VK_RIGHT -> fly.moveFigure(1, 0);
-                case KeyEvent.VK_DOWN -> fly.moveFigure(0, 1);
-                case KeyEvent.VK_U -> fly.moveFigure(0, -1);
-                case KeyEvent.VK_UP -> fly.turnFigure();
+                case KeyEvent.VK_LEFT -> moveFly(-1, 0);
+                case KeyEvent.VK_RIGHT -> moveFly(1, 0);
+                case KeyEvent.VK_U -> moveFly(0, -1);
+                case KeyEvent.VK_UP -> turnFly(1);
+                case KeyEvent.VK_DOWN -> turnFly(2);
             }
         }
 
@@ -101,10 +107,9 @@ public class Window extends JFrame implements Runnable {
     }
 
     class TimeAdapter implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            fly.moveFigure(0,1);
+            moveFly(0,1);
         }
     }
 
