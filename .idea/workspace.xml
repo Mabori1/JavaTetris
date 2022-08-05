@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a10a72f4-8b86-492c-83a4-502f96485870" name="Changes" comment="Add koding.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Mapable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Mapable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/FlyFigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/FlyFigure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Box.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1659640256137</updated>
       <workItem from="1659640257531" duration="9788000" />
-      <workItem from="1659685615585" duration="35474000" />
+      <workItem from="1659685615585" duration="37267000" />
     </task>
     <task id="LOCAL-00001" summary="Add class Window, Coord, enum Figure.">
       <created>1659646858332</created>
@@ -135,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659716445656</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add koding.">
+      <created>1659728048776</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659728048776</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,7 +179,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/ui/Window.java</url>
-          <line>65</line>
+          <line>68</line>
           <properties class="ui.Window" method="showFigure">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -184,7 +188,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ui/Window.java</url>
-          <line>50</line>
+          <line>53</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

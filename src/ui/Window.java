@@ -28,7 +28,12 @@ public class Window extends JFrame implements Runnable, Mapable {
 
     public void addFigure() {
         fly = new FlyFigure(this);
-        showFigure();
+        if (fly.canPlaceFigure())
+            showFigure();
+        else {
+            setVisible(false);
+            dispose();
+        }
     }
 
     private void initForm() {
@@ -116,8 +121,8 @@ public class Window extends JFrame implements Runnable, Mapable {
     }
 
     private void stripLine() {
-        for (int y = Config.WIDTH - 1; y >= 0; y--) {
-            if (isFullLine(y))
+        for (int y = Config.HEIGHT - 1; y >= 0; y--) {
+            while (isFullLine(y))
                 dropLine(y);
         }
     }
@@ -125,7 +130,7 @@ public class Window extends JFrame implements Runnable, Mapable {
     private void dropLine(int y) {
         for (int my = y - 1; my >= 0; my--)
             for (int x = 0; x < Config.WIDTH; x++)
-                setBoxColor(x, my, getBoxColor(x, my + 1));
+                setBoxColor(x, my + 1, getBoxColor(x, my));
         for (int x = 0; x < Config.WIDTH; x++)
             setBoxColor(x, 0, 0);
 

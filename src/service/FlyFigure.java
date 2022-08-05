@@ -35,6 +35,9 @@ public class FlyFigure {
         return figure;
     }
 
+    public boolean canPlaceFigure(){
+        return canMoveFigure(figure, 0,0);
+    }
 
     private boolean canMoveFigure(Figures figure, int sx, int sy) {
         if (coord.x + sx + figure.top.x < 0) return false;
