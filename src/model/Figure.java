@@ -82,8 +82,8 @@ public enum Figure {
         int x = dots.get(0).x;
         int y = dots.get(0).y;
         for (Coord coord : dots) {
-            if (x > coord.x) x = coord.x;
-            if (y > coord.y) y = coord.y;
+            if (x < coord.x) x = coord.x;
+            if (y < coord.y) y = coord.y;
         }
         return new Coord(x, y);
 
@@ -93,8 +93,8 @@ public enum Figure {
         int x = dots.get(0).x;
         int y = dots.get(0).y;
         for (Coord coord : dots) {
-            if (x < coord.x) x = coord.x;
-            if (y < coord.y) y = coord.y;
+            if (x > coord.x) x = coord.x;
+            if (y > coord.y) y = coord.y;
         }
         return new Coord(x, y);
     }

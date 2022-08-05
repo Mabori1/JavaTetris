@@ -29,12 +29,13 @@ public class Window extends JFrame implements Runnable {
 
     private void initForm() {
         setSize(Config.WIDTH * Config.SIZE + 15,
-                Config.HEIGHT * Config.SIZE + 30);
+                Config.HEIGHT * Config.SIZE + 40);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setTitle("Tetris Game");
         setLayout(null);
         setVisible(true);
-        setTitle("Tetris Game");
-        setLocationRelativeTo(null);
+
     }
 
     private void initBoxes() {
@@ -70,16 +71,21 @@ public class Window extends JFrame implements Runnable {
         boxes[x][y].setColor(color);
     }
 
-    private boolean canMoveFigure(int sx, int sy) {
-        int left = coord.x + sx + figure.top.x;
-        if (left < 0) return false;
-        int right = coord.x + sx + figure.bot.x;
-        if (right >= Config.WIDTH) return false;
-        else return true;
-    }
+    private boolean canMoveFigure(Figure figure, int sx, int sy) {
 
+        if (coord.x + sx + figure.top.x < 0) return false;
+        if (coord.x + sx + figure.bot.x >= Config.WIDTH) return false;
+        if (coord.y + sy + figure.top.y < 0) return false;
+        if (coord.y + sy +figure.bot.y >= Config.HEIGHT) return false;
+        return true;
+    }
+    private void turnFigure() {
+        Figure rotate = figure.turnRight();
+        if (!canMoveFigure(rotate,0,0)) return;
+        figure = rotate;
+    }
     private void moveFigure(int sx, int sy) {
-        if (canMoveFigure(sx, sy))
+        if (canMoveFigure(figure,sx, sy))
             coord = coord.plus(sx, sy);
     }
 
@@ -95,6 +101,9 @@ public class Window extends JFrame implements Runnable {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT -> moveFigure(-1,0);
                 case KeyEvent.VK_RIGHT -> moveFigure(1,0);
+                case KeyEvent.VK_DOWN -> moveFigure(0,1);
+                case KeyEvent.VK_UP -> moveFigure(0,-1);
+                case KeyEvent.VK_SPACE -> turnFigure();
             }
             showFigure();
         }
@@ -103,4 +112,5 @@ public class Window extends JFrame implements Runnable {
         public void keyReleased(KeyEvent e) {
         }
     }
+
 }

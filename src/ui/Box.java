@@ -12,7 +12,6 @@ public class Box extends JPanel {
     public void setColor(int j) {
         if (j == 0) setBackground(Config.BACK);
         else setBackground(Config.FORE);
-
     }
 
 }
