@@ -22,7 +22,7 @@ public class Window extends JFrame implements Runnable, Mapable {
         initBoxes();
         addKeyListener(new KeyAdapter());
         TimeAdapter timeAdapter = new TimeAdapter();
-        Timer timer = new Timer(200,timeAdapter);
+        Timer timer = new Timer(200, timeAdapter);
         timer.start();
     }
 
@@ -63,7 +63,7 @@ public class Window extends JFrame implements Runnable, Mapable {
         showFigure(0);
     }
 
-    private void showFigure( int color) {
+    private void showFigure(int color) {
         for (Coord dot : fly.getFigure().dots)
             setBoxColor(fly.getCoord().x + dot.x, fly.getCoord().y + dot.y, color);
     }
@@ -74,22 +74,25 @@ public class Window extends JFrame implements Runnable, Mapable {
         if (y < 0 || y >= Config.HEIGHT) return;
         boxes[x][y].setColor(color);
     }
-    public int getBoxColor(int x,int y){
+
+    public int getBoxColor(int x, int y) {
         if (x < 0 || x >= Config.WIDTH) return -1;
         if (y < 0 || y >= Config.HEIGHT) return -1;
         return boxes[x][y].getColor();
     }
-    private void moveFly(int sx, int sy){
+
+    private void moveFly(int sx, int sy) {
         hideFigure();
         fly.moveFigure(sx, sy);
         showFigure();
     }
 
-    private void turnFly(int direction){
+    private void turnFly(int direction) {
         hideFigure();
         fly.turnFigure(direction);
         showFigure();
     }
+
     class KeyAdapter implements KeyListener {
 
         @Override
@@ -111,13 +114,40 @@ public class Window extends JFrame implements Runnable, Mapable {
         public void keyReleased(KeyEvent e) {
         }
     }
-    class TimeAdapter implements ActionListener{
+
+    private void stripLine() {
+        for (int y = Config.WIDTH - 1; y >= 0; y--) {
+            if (isFullLine(y))
+                dropLine(y);
+        }
+    }
+
+    private void dropLine(int y) {
+        for (int my = y - 1; my >= 0; my--)
+            for (int x = 0; x < Config.WIDTH; x++)
+                setBoxColor(x, my, getBoxColor(x, my + 1));
+        for (int x = 0; x < Config.WIDTH; x++)
+            setBoxColor(x, 0, 0);
 
 
+    }
+
+    private boolean isFullLine(int y) {
+        for (int i = 0; i < Config.WIDTH; i++)
+            if (getBoxColor(i, y) != 2)
+                return false;
+        return true;
+
+    }
+
+
+    class TimeAdapter implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            moveFly(0,1);
-            if (fly.isLanded()){
+            moveFly(0, 1);
+            if (fly.isLanded()) {
+                showFigure(2);
+                stripLine();
                 addFigure();
             }
         }

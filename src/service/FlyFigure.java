@@ -12,7 +12,7 @@ public class FlyFigure {
     private Coord coord;
     private boolean lended;
     private int ticks;
-    Mapable map;
+    private Mapable map;
 
     public FlyFigure(Mapable map) {
         this.map = map;
@@ -42,7 +42,7 @@ public class FlyFigure {
         //if (coord.y + sy + figure.top.y < 0) return false;
         if (coord.y + sy + figure.bot.y >= Config.HEIGHT) return false;
         for (Coord coord1 : figure.dots)
-            if (map.getBoxColor(coord1.x + sx, coord1.y + sy) == 0)
+            if (map.getBoxColor(coord1.x + coord.x + sx, coord1.y + coord.y + sy) == 0)
                 return false;
         return true;
     }
@@ -71,6 +71,4 @@ public class FlyFigure {
             moveFigure(0, -1);
         }
     }
-
-
 }
