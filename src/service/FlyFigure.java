@@ -2,6 +2,7 @@ package service;
 
 import model.Coord;
 import model.Figures;
+import model.Mapable;
 import ui.Config;
 
 public class FlyFigure {
@@ -9,7 +10,22 @@ public class FlyFigure {
     private Figures figure;
 
     private Coord coord;
+    private boolean lended;
+    private int ticks;
+    Mapable map;
 
+    public FlyFigure(Mapable map) {
+        this.map = map;
+        figure = Figures.getRandom();
+        coord = new Coord(Config.WIDTH / 2 - 2, -figure.top.y - figure.bot.y - 1);
+        lended = false;
+        ticks = 2;
+    }
+
+    public boolean isLanded() {
+        return lended;
+
+    }
 
     public Coord getCoord() {
         return coord;
@@ -19,22 +35,25 @@ public class FlyFigure {
         return figure;
     }
 
-    public FlyFigure() {
-        figure = Figures.getRandom();
-        coord = new Coord(Config.WIDTH / 2 - 2, -figure.top.y - figure.bot.y - 1);
-    }
 
     private boolean canMoveFigure(Figures figure, int sx, int sy) {
         if (coord.x + sx + figure.top.x < 0) return false;
         if (coord.x + sx + figure.bot.x >= Config.WIDTH) return false;
         //if (coord.y + sy + figure.top.y < 0) return false;
         if (coord.y + sy + figure.bot.y >= Config.HEIGHT) return false;
+        for (Coord coord1 : figure.dots)
+            if (map.getBoxColor(coord1.x + sx, coord1.y + sy) == 0)
+                return false;
         return true;
     }
 
     public void moveFigure(int sx, int sy) {
         if (canMoveFigure(figure, sx, sy))
             coord = coord.plus(sx, sy);
+        else if (sy == 1) {
+            if (ticks > 0) ticks--;
+            else lended = true;
+        }
     }
 
     public void turnFigure(int direction) {

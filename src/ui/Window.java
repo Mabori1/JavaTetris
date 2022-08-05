@@ -1,6 +1,7 @@
 package ui;
 
 import model.Coord;
+import model.Mapable;
 import service.FlyFigure;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Window extends JFrame implements Runnable {
+public class Window extends JFrame implements Runnable, Mapable {
 
     private final Box[][] boxes;
     private FlyFigure fly;
@@ -21,12 +22,12 @@ public class Window extends JFrame implements Runnable {
         initBoxes();
         addKeyListener(new KeyAdapter());
         TimeAdapter timeAdapter = new TimeAdapter();
-        Timer timer = new Timer(1000,timeAdapter);
+        Timer timer = new Timer(200,timeAdapter);
         timer.start();
     }
 
     public void addFigure() {
-        fly = new FlyFigure();
+        fly = new FlyFigure(this);
         showFigure();
     }
 
@@ -73,19 +74,24 @@ public class Window extends JFrame implements Runnable {
         if (y < 0 || y >= Config.HEIGHT) return;
         boxes[x][y].setColor(color);
     }
+    public int getBoxColor(int x,int y){
+        if (x < 0 || x >= Config.WIDTH) return -1;
+        if (y < 0 || y >= Config.HEIGHT) return -1;
+        return boxes[x][y].getColor();
+    }
     private void moveFly(int sx, int sy){
         hideFigure();
         fly.moveFigure(sx, sy);
         showFigure();
     }
+
     private void turnFly(int direction){
         hideFigure();
         fly.turnFigure(direction);
         showFigure();
     }
-
-
     class KeyAdapter implements KeyListener {
+
         @Override
         public void keyTyped(KeyEvent e) {
         }
@@ -105,12 +111,15 @@ public class Window extends JFrame implements Runnable {
         public void keyReleased(KeyEvent e) {
         }
     }
-
     class TimeAdapter implements ActionListener{
+
+
         @Override
         public void actionPerformed(ActionEvent e) {
             moveFly(0,1);
+            if (fly.isLanded()){
+                addFigure();
+            }
         }
     }
-
 }
