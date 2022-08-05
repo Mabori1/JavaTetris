@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a10a72f4-8b86-492c-83a4-502f96485870" name="Changes" comment="Add class Window, Coord, enum Figure.">
-      <change afterPath="$PROJECT_DIR$/src/Tetris.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/Box.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/Config.java" afterDir="false" />
+    <list default="true" id="a10a72f4-8b86-492c-83a4-502f96485870" name="Changes" comment="Add clas Tetris, Box, Config.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tetris.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tetris.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Coord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Coord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Figure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Box.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Box.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +42,7 @@
     "project.structure.last.edited": "Problems",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.customizations"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RunManager">
@@ -66,7 +67,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1659640256137</updated>
-      <workItem from="1659640257531" duration="9562000" />
+      <workItem from="1659640257531" duration="9788000" />
+      <workItem from="1659685615585" duration="11753000" />
     </task>
     <task id="LOCAL-00001" summary="Add class Window, Coord, enum Figure.">
       <created>1659646858332</created>
@@ -75,7 +77,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659646858333</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add clas Tetris, Box, Config.">
+      <created>1659650112181</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1659650112181</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,6 +103,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add class Window, Coord, enum Figure." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add class Window, Coord, enum Figure." />
+    <MESSAGE value="Add clas Tetris, Box, Config." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add clas Tetris, Box, Config." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

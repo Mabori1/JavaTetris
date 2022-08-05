@@ -4,9 +4,15 @@ import javax.swing.*;
 
 public class Box extends JPanel {
     public Box(int x, int y) {
-        setBounds(x*Config.SIZE, y*Config.SIZE, Config.SIZE, Config.SIZE);
+        setBounds(x * Config.SIZE, y * Config.SIZE, Config.SIZE, Config.SIZE);
         setBackground(Config.BACK);
         setVisible(true);
+    }
+
+    public void setColor(int j) {
+        if (j == 0) setBackground(Config.BACK);
+        else setBackground(Config.FORE);
+
     }
 
 }

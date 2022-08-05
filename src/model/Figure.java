@@ -4,77 +4,102 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Figure {
-    I1(0, 1,    1, 1,    2, 1,     3, 1),
+    I1(0, 1, 1, 1, 2, 1, 3, 1),
 
     I2(1, 0,
-               1, 1,
-               1, 2,
-               1, 3),
+            1, 1,
+            1, 2,
+            1, 3),
 
-    J1(     1, 0,
-                   1, 1,
-             0, 2, 1, 2),
+    J1(1, 0,
+            1, 1,
+            0, 2, 1, 2),
 
-    J2( 0, 0,
-                0, 1,  1, 1,  2, 1),
+    J2(0, 0,
+            0, 1, 1, 1, 2, 1),
 
-    J3(     1, 0, 2, 0,
-                   1, 1,
-                   1, 2),
+    J3(1, 0, 2, 0,
+            1, 1,
+            1, 2),
 
-    J4( 0, 1,    1, 1,    2, 1,
-                                  2, 2),
+    J4(0, 1, 1, 1, 2, 1,
+            2, 2),
 
-    L1(     1, 0,
-                   1, 1,
-                   1, 2, 2, 2),
+    L1(1, 0,
+            1, 1,
+            1, 2, 2, 2),
 
-    L2(    0, 1,  1, 1,  2, 1,
-                  0, 2),
+    L2(0, 1, 1, 1, 2, 1,
+            0, 2),
 
-    L3(     0, 0, 1, 0,
-                          1, 1,
-                          1, 2),
+    L3(0, 0, 1, 0,
+            1, 1,
+            1, 2),
 
-    L4(               2, 0,
-            0, 1,    1, 1,    2, 1),
+    L4(2, 0,
+            0, 1, 1, 1, 2, 1),
 
-    O(0, 0,  1, 0,
-              0, 1,  1, 1),
+    O(0, 0, 1, 0,
+            0, 1, 1, 1),
 
-    S1 (    1, 1,  2,1,
-             0,2,  1, 2),
-    S2(            0, 0,
-                           0, 1, 1, 1,
-                                 1, 2),
-    T1(     0,1,1,1,2,1,
-                       1,2),
+    S1(1, 1, 2, 1,
+            0, 2, 1, 2),
+    S2(0, 0,
+            0, 1, 1, 1,
+            1, 2),
+    T1(0, 1, 1, 1, 2, 1,
+            1, 2),
 
-    T2(       1,0,
-                  0,1, 1,1,
-                      1,2),
-    T3(            1,0,
-                      0,1,1,1, 2,1),
+    T2(1, 0,
+            0, 1, 1, 1,
+            1, 2),
+    T3(1, 0,
+            0, 1, 1, 1, 2, 1),
 
-    T4(         1,0,
-                        1,1, 2,1,
-                        1,2),
-    Z1( 0, 1, 1, 1,
-                     1, 2, 2, 2),
+    T4(1, 0,
+            1, 1, 2, 1,
+            1, 2),
+    Z1(0, 1, 1, 1,
+            1, 2, 2, 2),
 
-    Z2(           2,0,
-                     1,1,2,1,
-                     1,2);
+    Z2(2, 0,
+            1, 1, 2, 1,
+            1, 2);
 
-    private List<Coord> dot;
+    public final List<Coord> dots;
+    public final Coord top;
+    public final Coord bot;
 
     private Figure(int... coords) {
-        dot = new ArrayList<>();
+        dots = new ArrayList<>();
         for (int j = 0; j < coords.length; j += 2)
-            dot.add(new Coord (coords[j],coords[j+1]));
+            dots.add(new Coord(coords[j], coords[j + 1]));
+        top = setTop();
+        bot = setBot();
     }
 
-    public Figure turnRight(){
+    private Coord setBot() {
+        int x = dots.get(0).x;
+        int y = dots.get(0).y;
+        for (Coord coord : dots) {
+            if (x > coord.x) x = coord.x;
+            if (y > coord.y) y = coord.y;
+        }
+        return new Coord(x, y);
+
+    }
+
+    private Coord setTop() {
+        int x = dots.get(0).x;
+        int y = dots.get(0).y;
+        for (Coord coord : dots) {
+            if (x < coord.x) x = coord.x;
+            if (y < coord.y) y = coord.y;
+        }
+        return new Coord(x, y);
+    }
+
+    public Figure turnRight() {
         return switch (this) {
             case I1 -> I2;
             case I2 -> I1;
@@ -97,7 +122,12 @@ public enum Figure {
             case Z2 -> Z1;
         };
     }
-    public Figure turnLeft(){
+
+    public Figure turnLeft() {
         return turnRight().turnRight().turnRight();
+    }
+
+    public static Figure getRandom() {
+        return Figure.values()[(int) (Math.random() * Figure.values().length)];
     }
 }
