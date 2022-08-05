@@ -20,7 +20,7 @@ public class FlyFigure {
 
     public FlyFigure(){
         figure = Figures.getRandom();
-        coord = new Coord(Config.WIDTH/2 -2, -figure.top.y);
+        coord = new Coord(Config.WIDTH/2 -2, -figure.top.y - figure.bot.y -1);
     }
 
     private boolean canMoveFigure(Figures figure, int sx, int sy) {

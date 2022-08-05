@@ -6,6 +6,8 @@ import service.FlyFigure;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,6 +21,9 @@ public class Window extends JFrame implements Runnable {
         initForm();
         initBoxes();
         addKeyListener(new KeyAdapter());
+        TimeAdapter timeAdapter = new TimeAdapter();
+        Timer timer = new Timer(1000,timeAdapter);
+        timer.start();
     }
 
     public void addFigure() {
@@ -69,10 +74,10 @@ public class Window extends JFrame implements Runnable {
         if (y < 0 || y >= Config.HEIGHT) return;
         boxes[x][y].setColor(color);
     }
-
-
-
-
+    private void moveFly(int sx, int sy){
+        hideFigure();
+        showFigure();
+    }
 
     class KeyAdapter implements KeyListener {
         @Override
@@ -81,8 +86,6 @@ public class Window extends JFrame implements Runnable {
 
         @Override
         public void keyPressed(KeyEvent e) {
-
-            hideFigure();
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT -> fly.moveFigure(-1, 0);
                 case KeyEvent.VK_RIGHT -> fly.moveFigure(1, 0);
@@ -90,11 +93,18 @@ public class Window extends JFrame implements Runnable {
                 case KeyEvent.VK_U -> fly.moveFigure(0, -1);
                 case KeyEvent.VK_UP -> fly.turnFigure();
             }
-            showFigure();
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
+        }
+    }
+
+    class TimeAdapter implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            fly.moveFigure(0,1);
         }
     }
 
