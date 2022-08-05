@@ -1,7 +1,8 @@
 package ui;
 
 import model.Coord;
-import model.Figure;
+import model.Figures;
+import service.FlyFigure;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +12,7 @@ import java.awt.event.KeyListener;
 public class Window extends JFrame implements Runnable {
 
     private Box[][] boxes;
-    private Figure figure;
-    private Coord coord;
+    private FlyFigure fly;
 
     public Window() throws HeadlessException {
         boxes = new Box[Config.WIDTH][Config.HEIGHT];
@@ -22,8 +22,7 @@ public class Window extends JFrame implements Runnable {
     }
 
     public void addFigure() {
-        figure = Figure.getRandom();
-        coord = new Coord(5, 5);
+        fly = new FlyFigure();
         showFigure();
     }
 
@@ -52,16 +51,16 @@ public class Window extends JFrame implements Runnable {
     }
 
     private void showFigure() {
-        showFigure(figure, coord, 1);
+        showFigure(1);
     }
 
     private void hideFigure() {
-        showFigure(figure, coord, 0);
+        showFigure(0);
     }
 
-    private void showFigure(Figure figure, Coord at, int color) {
-        for (Coord dot : figure.dots)
-            setBoxColor(at.x + dot.x, at.y + dot.y, 1);
+    private void showFigure( int color) {
+        for (Coord dot : fly.getFigure().dots)
+            setBoxColor(fly.getCoord().x + dot.x, fly.getCoord().y + dot.y, 1);
     }
 
 
@@ -71,36 +70,9 @@ public class Window extends JFrame implements Runnable {
         boxes[x][y].setColor(color);
     }
 
-    private boolean canMoveFigure(Figure figure, int sx, int sy) {
 
-        if (coord.x + sx + figure.top.x < 0) return false;
-        if (coord.x + sx + figure.bot.x >= Config.WIDTH) return false;
-        //if (coord.y + sy + figure.top.y < 0) return false;
-        if (coord.y + sy + figure.bot.y >= Config.HEIGHT) return false;
-        return true;
-    }
 
-    private void turnFigure() {
-        Figure rotate = figure.turnRight();
-        if (canMoveFigure(rotate, 0, 0))
-            figure = rotate;
-        else if (canMoveFigure(rotate, 1, 0)) {
-            figure = rotate;
-            moveFigure(1, 0);
-        } else if (canMoveFigure(rotate, -1, 0)) {
-            figure = rotate;
-            moveFigure(-1, 0);
-        }else
-        if (canMoveFigure(rotate, 0,-1)) {
-            figure = rotate;
-            moveFigure(0, -1);
-        }
-    }
 
-    private void moveFigure(int sx, int sy) {
-        if (canMoveFigure(figure, sx, sy))
-            coord = coord.plus(sx, sy);
-    }
 
     class KeyAdapter implements KeyListener {
         @Override
@@ -112,11 +84,11 @@ public class Window extends JFrame implements Runnable {
 
             hideFigure();
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT -> moveFigure(-1, 0);
-                case KeyEvent.VK_RIGHT -> moveFigure(1, 0);
-                case KeyEvent.VK_DOWN -> moveFigure(0, 1);
-                case KeyEvent.VK_UP -> moveFigure(0, -1);
-                case KeyEvent.VK_SPACE -> turnFigure();
+                case KeyEvent.VK_LEFT -> fly.moveFigure(-1, 0);
+                case KeyEvent.VK_RIGHT -> fly.moveFigure(1, 0);
+                case KeyEvent.VK_DOWN -> fly.moveFigure(0, 1);
+                case KeyEvent.VK_U -> fly.moveFigure(0, -1);
+                case KeyEvent.VK_UP -> fly.turnFigure();
             }
             showFigure();
         }

@@ -1,5 +1,3 @@
-import model.Coord;
-import model.Figure;
 import ui.Window;
 
 public class Tetris {
